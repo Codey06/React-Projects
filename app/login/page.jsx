@@ -5,6 +5,10 @@ import { useActionState } from "react"
 import createSession from "../actions/createSession"
 const LoginPage=()=>{
   const [state, formAction]=useActionState(createSession, {})
+
+  useEffect(()=>{
+    if(state.error) console.log(state.error)
+  },[state])
     return (
         
         <div className="flex items-center justify-center">
@@ -23,7 +27,7 @@ const LoginPage=()=>{
                 id="email"
                 name="email"
                 className="border rounded w-full py-2 px-3"
-                required
+                
               />
             </div>
 
@@ -36,7 +40,7 @@ const LoginPage=()=>{
                 id="password"
                 name="password"
                 className="border rounded w-full py-2 px-3"
-                required
+                
               />
             </div>
 
