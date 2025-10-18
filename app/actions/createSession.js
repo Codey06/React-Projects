@@ -5,7 +5,10 @@ async function createSession(previousState,formData) {
     const password=formData.get('password')
     if(!email || !password){
         return{
-            error: 'Please fill out fields'
+            error: 'Please fill out fields',
+        }
+        return{
+            success: true,
         }
 
     }

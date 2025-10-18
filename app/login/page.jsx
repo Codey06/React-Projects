@@ -1,13 +1,20 @@
 'use client'
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
 import { useEffect } from "react"
 import { useActionState } from "react"
 import createSession from "../actions/createSession"
 const LoginPage=()=>{
   const [state, formAction]=useActionState(createSession, {})
-
+  const router=useRouter()
   useEffect(()=>{
-    if(state.error) console.log(state.error)
+    if(state?.error) toast.error(state.error)
+      if(state?.success){
+        toast.success('Logged in successfully')
+        router.push('/')
+
+      }
   },[state])
     return (
         
@@ -27,12 +34,13 @@ const LoginPage=()=>{
                 id="email"
                 name="email"
                 className="border rounded w-full py-2 px-3"
+                required
                 
               />
             </div>
 
             <div className="mb-6">
-              <label for="password" className="block text-gray-700 font-bold mb-2"
+              <label htmlFor="password" className="block text-gray-700 font-bold mb-2"
                 >Password</label
               >
               <input
@@ -40,6 +48,7 @@ const LoginPage=()=>{
                 id="password"
                 name="password"
                 className="border rounded w-full py-2 px-3"
+                required
                 
               />
             </div>
